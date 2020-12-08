@@ -163,11 +163,12 @@ func (s *PdfMaroto) AddPage() {
 // AddPage adds a new page in the PDF
 func (s *PdfMaroto) AddPageFormat(orientation string) {
 	var ps = gofpdf.SizeType{
-		Wd: 0,
-		Ht: 0,
+		Wd: 595.28,
+		Ht: 841.89,
 	}
+
 	s.Pdf.AddPageFormat(orientation, ps)
-	s.AddPage()
+	//s.AddPage()
 }
 
 // RegisterHeader define a sequence of Rows, Lines ou TableLists
