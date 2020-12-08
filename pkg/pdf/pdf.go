@@ -41,7 +41,7 @@ type Maroto interface {
 
 	// Helpers
 	AddPage()
-	AddPageFormat(orientation consts.Orientation)
+	AddPageFormat(orientation string)
 	SetBorder(on bool)
 	SetBackgroundColor(color color.Color)
 	SetAliasNbPages(alias string)
@@ -161,14 +161,12 @@ func (s *PdfMaroto) AddPage() {
 }
 
 // AddPage adds a new page in the PDF
-func (s *PdfMaroto) AddPageFormat(orientation consts.Orientation) {
-	if orientation != s.orientation {
-		s.orientation = orientation
-		s.AddPage()
-
-	} else {
-		s.AddPage()
+func (s *PdfMaroto) AddPageFormat(orientation string) {
+	var ps = gofpdf.SizeType{
+		Wd: 0,
+		Ht: 0,
 	}
+	s.Pdf.AddPageFormat(orientation, ps)
 }
 
 // RegisterHeader define a sequence of Rows, Lines ou TableLists
