@@ -41,7 +41,7 @@ type Maroto interface {
 
 	// Helpers
 	AddPage()
-	AddPageRotate()
+	AddPageFormat(orientation consts.Orientation)
 	SetBorder(on bool)
 	SetBackgroundColor(color color.Color)
 	SetAliasNbPages(alias string)
@@ -87,6 +87,7 @@ type PdfMaroto struct {
 // Use if custom page size is needed. Otherwise use NewMaroto() shorthand if using page sizes from consts.Pagesize.
 // If using custom width and height, pageSize is just a string value for the format and takes no effect.
 // Width and height inputs are measurements of the page in Portrait orientation.
+
 func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSize, unitStr string, width, height float64) Maroto {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: string(orientation),
@@ -160,16 +161,14 @@ func (s *PdfMaroto) AddPage() {
 }
 
 // AddPage adds a new page in the PDF
-func (s *PdfMaroto) AddPageRotate() {
-	pageWeight, _ := s.Pdf.GetPageSize()
-	_, top, _, bottom := s.Pdf.GetMargins()
+func (s *PdfMaroto) AddPageFormat(orientation consts.Orientation) {
+	if orientation != s.orientation {
+		s.orientation = orientation
+		s.AddPage()
 
-	totalOffsetY := int(s.offsetY + s.footerHeight)
-	maxOffsetPage := int(pageWeight - bottom - top)
-
-	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
-		s.ColSpace(12)
-	})
+	} else {
+		s.AddPage()
+	}
 }
 
 // RegisterHeader define a sequence of Rows, Lines ou TableLists
