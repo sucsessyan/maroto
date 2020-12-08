@@ -5,10 +5,10 @@ import (
 
 	"github.com/sucsessyan/maroto/pkg/color"
 
+	"github.com/jung-kurt/gofpdf"
 	"github.com/sucsessyan/maroto/internal"
 	"github.com/sucsessyan/maroto/pkg/consts"
 	"github.com/sucsessyan/maroto/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 // Maroto is the principal abstraction to create a PDF document.
@@ -41,6 +41,7 @@ type Maroto interface {
 
 	// Helpers
 	AddPage()
+	AddPageRotate()
 	SetBorder(on bool)
 	SetBackgroundColor(color color.Color)
 	SetAliasNbPages(alias string)
@@ -152,6 +153,19 @@ func (s *PdfMaroto) AddPage() {
 
 	totalOffsetY := int(s.offsetY + s.footerHeight)
 	maxOffsetPage := int(pageHeight - bottom - top)
+
+	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
+		s.ColSpace(12)
+	})
+}
+
+// AddPage adds a new page in the PDF
+func (s *PdfMaroto) AddPageRotate() {
+	pageWeight, _ := s.Pdf.GetPageSize()
+	_, top, _, bottom := s.Pdf.GetMargins()
+
+	totalOffsetY := int(s.offsetY + s.footerHeight)
+	maxOffsetPage := int(pageWeight - bottom - top)
 
 	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
 		s.ColSpace(12)
