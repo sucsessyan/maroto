@@ -167,6 +167,7 @@ func (s *PdfMaroto) AddPageFormat(orientation string) {
 		Ht: 0,
 	}
 	s.Pdf.AddPageFormat(orientation, ps)
+	s.AddPage()
 }
 
 // RegisterHeader define a sequence of Rows, Lines ou TableLists
