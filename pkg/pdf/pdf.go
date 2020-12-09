@@ -162,9 +162,22 @@ func (s *PdfMaroto) AddPage() {
 
 // AddPage adds a new page in the PDF
 func (s *PdfMaroto) AddPageFormat(orientation string) {
+
+	/*
+	   case "p", "portrait":
+	   		f.defOrientation = "P"
+	   		f.w = f.defPageSize.Wd
+	   		f.h = f.defPageSize.Ht
+	   		// dbg("Assign h: %8.2f", f.h)
+	   	case "l", "landscape":
+	   		f.defOrientation = "L"
+	   		f.w = f.defPageSize.Ht
+	   		f.h = f.defPageSize.Wd
+	*/
+	//var wds = gofpdf.getpagesizestr("A4")
 	var ps = gofpdf.SizeType{
-		Wd: 595.28,
-		Ht: 841.89,
+		Wd: 210,
+		Ht: 297,
 	}
 
 	s.Pdf.AddPageFormat(orientation, ps)
