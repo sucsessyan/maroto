@@ -183,7 +183,7 @@ func (s *PdfMaroto) AddPageFormat(orientation string, watermark bool) {
 	if watermark {
 		ctrX := 210.0 / 2.0
 		ctrY := 297.0 / 2.0
-		markFontHt := 50.0
+		markFontHt := 150.0
 		markLineHt := s.Pdf.PointToUnitConvert(markFontHt)
 		margin := 25.0
 		markY := (297.0 - markLineHt) / 2.0
