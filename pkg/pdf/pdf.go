@@ -41,6 +41,7 @@ type Maroto interface {
 
 	// Helpers
 	AddPage()
+	AddWaterMark()
 	AddPageFormat(orientation string, watermark bool)
 	SetBorder(on bool)
 	SetBackgroundColor(color color.Color)
