@@ -160,6 +160,28 @@ func (s *PdfMaroto) AddPage() {
 	})
 }
 
+func (s *PdfMaroto) AddWaterMark() {
+	ctrX := 210.0 / 2.0
+	ctrY := 297.0 / 2.0
+	markFontHt := 150.0
+	markLineHt := s.Pdf.PointToUnitConvert(markFontHt)
+	margin := 25.0
+	markY := (297.0 - markLineHt) / 2.0
+
+	s.Pdf.SetHeaderFunc(func() {
+		s.Pdf.SetFont("Arial", "B", markFontHt)
+		s.Pdf.SetTextColor(206, 216, 232)
+		s.Pdf.SetXY(margin, markY)
+		s.Pdf.TransformBegin()
+		s.Pdf.TransformRotate(45, ctrX, ctrY)
+		s.Pdf.CellFormat(0, markLineHt, "D R A F T", "", 0, "C", false, 0, "")
+		s.Pdf.TransformEnd()
+		s.Pdf.SetXY(margin, margin)
+	})
+	s.AddPage()
+
+}
+
 // AddPage adds a new page in the PDF
 func (s *PdfMaroto) AddPageFormat(orientation string, watermark bool) {
 
