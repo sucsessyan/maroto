@@ -179,7 +179,7 @@ func (s *PdfMaroto) AddWaterMark() {
 		s.Pdf.TransformEnd()
 		s.Pdf.SetXY(margin, margin)
 	})
-	s.AddPage()
+	//	s.AddPage()
 
 }
 
