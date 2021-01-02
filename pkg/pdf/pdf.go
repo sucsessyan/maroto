@@ -180,7 +180,6 @@ func (s *PdfMaroto) AddPageFormat(orientation string, watermark bool) {
 		Ht: 297,
 	}
 
-	s.Pdf.AddPageFormat(orientation, ps)
 	if watermark {
 		ctrX := 210.0 / 2.0
 		ctrY := 297.0 / 2.0
@@ -200,6 +199,7 @@ func (s *PdfMaroto) AddPageFormat(orientation string, watermark bool) {
 			s.Pdf.SetXY(margin, margin)
 		})
 	}
+	s.Pdf.AddPageFormat(orientation, ps)
 	//s.AddPage()
 }
 
