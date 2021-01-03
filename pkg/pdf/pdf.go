@@ -136,6 +136,8 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 	maroto.Font.SetSize(16)
 	maroto.debugMode = false
 
+	maroto.AddWaterMark()
+
 	maroto.Pdf.AddPage()
 
 	return maroto
@@ -179,7 +181,7 @@ func (s *PdfMaroto) AddWaterMark() {
 		s.Pdf.TransformEnd()
 		s.Pdf.SetXY(margin, margin)
 	})
-	s.Pdf.AddPage()
+	//	s.Pdf.AddPage()
 	//	s.AddPage()
 
 }
