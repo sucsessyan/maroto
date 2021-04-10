@@ -3,17 +3,18 @@ package pdf_test
 import (
 	"bytes"
 	"fmt"
-	"github.com/sucsessyan/maroto/internal"
-	"github.com/sucsessyan/maroto/pkg/color"
 	"testing"
 
+	"github.com/sucsessyan/maroto/internal"
+	"github.com/sucsessyan/maroto/pkg/color"
+
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 	"github.com/sucsessyan/maroto/internal/mocks"
 	"github.com/sucsessyan/maroto/pkg/consts"
 	"github.com/sucsessyan/maroto/pkg/pdf"
 	"github.com/sucsessyan/maroto/pkg/props"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
 )
 
 func TestNewPdf(t *testing.T) {
@@ -147,7 +148,7 @@ func TestNewPdf(t *testing.T) {
 
 	for _, c := range cases {
 		// Act
-		m := pdf.NewMaroto(c.orientation, c.pageSize)
+		m := pdf.NewMaroto(c.orientation, c.pageSize, false)
 
 		// Assert
 		c.assert(t, m)
@@ -229,7 +230,7 @@ func TestNewCustomSizePdf(t *testing.T) {
 
 	for _, c := range cases {
 		// Act
-		m := pdf.NewMarotoCustomSize(c.orientation, c.pageSize, c.unit, c.width, c.height)
+		m := pdf.NewMarotoCustomSize(c.orientation, c.pageSize, c.unit, c.width, c.height, false)
 
 		// Assert
 		c.assert(t, m)
@@ -239,7 +240,7 @@ func TestNewCustomSizePdf(t *testing.T) {
 
 func TestPdfMaroto_SetGetDebugMode(t *testing.T) {
 	// Arrange
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Assert & Act
 	assert.False(t, m.GetBorder())
@@ -251,7 +252,7 @@ func TestPdfMaroto_SetGetDebugMode(t *testing.T) {
 
 func TestPdfMaroto_SetFirstPageNb(t *testing.T) {
 	// Arrange
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Assert & Act
 	assert.Equal(t, 0, m.GetCurrentPage())

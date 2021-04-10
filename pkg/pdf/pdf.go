@@ -89,7 +89,7 @@ type PdfMaroto struct {
 // If using custom width and height, pageSize is just a string value for the format and takes no effect.
 // Width and height inputs are measurements of the page in Portrait orientation.
 
-func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSize, unitStr string, width, height float64) Maroto {
+func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSize, unitStr string, width, height float64, watermark bool) Maroto {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: string(orientation),
 		UnitStr:        unitStr,
@@ -136,7 +136,10 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 	maroto.Font.SetSize(16)
 	maroto.debugMode = false
 
-	maroto.AddWaterMark()
+	if watermark {
+		maroto.AddWaterMark()
+
+	}
 
 	maroto.Pdf.AddPage()
 
@@ -146,8 +149,8 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 // NewMaroto create a Maroto instance returning a pointer to PdfMaroto
 // Receive an Orientation and a PageSize.
 // Shorthand when using a preset page size from consts.PageSize
-func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto {
-	return NewMarotoCustomSize(orientation, pageSize, "mm", 0, 0)
+func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize, watermark bool) Maroto {
+	return NewMarotoCustomSize(orientation, pageSize, "mm", 0, 0, watermark)
 }
 
 // AddPage adds a new page in the PDF

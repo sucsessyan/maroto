@@ -13,7 +13,7 @@ import (
 
 // ExampleNewMaroto demonstrates how to create maroto
 func ExampleNewMaroto() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Do things
 	m.GetPageMargins()
@@ -23,7 +23,7 @@ func ExampleNewMaroto() {
 
 // ExampleNewMaroto demonstrates how to create maroto with custom page size
 func ExampleNewMarotoCustomSize() {
-	m := pdf.NewMarotoCustomSize(consts.Landscape, "C6", "mm", 114.0, 162.0)
+	m := pdf.NewMarotoCustomSize(consts.Landscape, "C6", "mm", 114.0, 162.0, false)
 
 	// Do things
 	m.GetPageMargins()
@@ -33,7 +33,7 @@ func ExampleNewMarotoCustomSize() {
 
 // ExamplePdfMaroto_AddPage how to force add a new page
 func ExamplePdfMaroto_AddPage() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Add rows, cols and components
 	m.AddPage()
@@ -44,7 +44,7 @@ func ExamplePdfMaroto_AddPage() {
 
 // ExamplePdfMaroto_Row demonstrates how to define a row.
 func ExamplePdfMaroto_Row() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
@@ -57,7 +57,7 @@ func ExamplePdfMaroto_Row() {
 // ExamplePdfMaroto_Col demonstrates how to add
 // an useful column
 func ExamplePdfMaroto_Col() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	// Warning: The sum of all column gridSize cannot extrapolate 12
@@ -83,7 +83,7 @@ func ExamplePdfMaroto_Col() {
 // ExamplePdfMaroto_ColSpace demonstrates how to add
 // an empty column inside a row.
 func ExamplePdfMaroto_ColSpace() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	// Warning: The sum of all column gridSize cannot extrapolate 12
@@ -111,7 +111,7 @@ func ExamplePdfMaroto_RegisterHeader() {
 	// Col's if necessary.
 	// You have to register the header immediately after the Maroto
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	m.RegisterHeader(func() {
 		m.Row(10, func() {
@@ -142,7 +142,7 @@ func ExamplePdfMaroto_RegisterFooter() {
 	// Col's if necessary.
 	// You have to register the footer immediately after the Maroto
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	m.RegisterFooter(func() {
 		m.Row(10, func() {
@@ -175,7 +175,7 @@ func ExamplePdfMaroto_TableList() {
 	// of content array in the first line, the values will be perfectly divided to make all columns with the same size.
 	// Not passing HeaderContentSpace, will make the method use 4.
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	headers := []string{"Header1", "Header2"}
 	contents := [][]string{
@@ -212,7 +212,7 @@ func ExamplePdfMaroto_TableList() {
 // ExamplePdfMaroto_Line demonstrates how to draw a line
 // separator.
 func ExamplePdfMaroto_Line() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	m.Line(1.0)
 
@@ -231,7 +231,7 @@ func ExamplePdfMaroto_Text() {
 	// Top cannot be less than 0.
 	// VerticalPadding cannot be less than 0.
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
@@ -260,7 +260,7 @@ func ExamplePdfMaroto_FileImage() {
 	// Ex: 85, means that Image will have width of 85% of column width.
 	// When center is false, is possible to manually positioning the Image.
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
@@ -286,7 +286,7 @@ func ExamplePdfMaroto_Base64Image() {
 	// Ex: 85, means that Image will have width of 85% of column width.
 	// When center is false, is possible to manually positioning the Image.
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	// Bytes of the image loaded
@@ -320,7 +320,7 @@ func ExamplePdfMaroto_Barcode() {
 	// There is a constraint in the proportion defined, height cannot be greater than 20% of
 	// the width, and height cannot be smaller than 10% of the width.
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Do a lot of things on rows and columns...
 
@@ -346,7 +346,7 @@ func ExamplePdfMaroto_QrCode() {
 	// When center is false, positioning of the QR Code can be done through
 	// left and top.
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
@@ -369,7 +369,7 @@ func ExamplePdfMaroto_Signature() {
 	// Not passing style, make method use normal.
 	// Not passing size, make method use 10.0.
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
@@ -388,7 +388,7 @@ func ExamplePdfMaroto_Signature() {
 // ExamplePdfMaroto_OutputFileAndClose demonstrates how to
 // save a PDF object into disk.
 func ExamplePdfMaroto_OutputFileAndClose() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Do a lot of things on rows and columns...
 
@@ -401,7 +401,7 @@ func ExamplePdfMaroto_OutputFileAndClose() {
 // ExamplePdfMaroto_Output demonstrates how to get a
 // base64 string from PDF
 func ExamplePdfMaroto_Output() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Do a lot of things on rows and columns...
 
@@ -414,7 +414,7 @@ func ExamplePdfMaroto_Output() {
 // ExamplePdfMaroto_SetBorder demonstrates how to
 // enable the line drawing in every cell
 func ExamplePdfMaroto_SetBorder() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 	m.SetBorder(true)
 
 	// Add some Rows, Cols, Lines and etc...
@@ -431,7 +431,7 @@ func ExamplePdfMaroto_SetBorder() {
 // ExamplePdfMaroto_SetFirstPageNb demonstrates
 // how to use SetFirstPageNb method.
 func ExamplePdfMaroto_SetFirstPageNb() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Ths will set first page index to 1
 	m.SetFirstPageNb(1)
@@ -440,7 +440,7 @@ func ExamplePdfMaroto_SetFirstPageNb() {
 // ExamplePdfMaroto_SetAliasNbPages demonstrates
 // how to use SetAliasNbPages method.
 func ExamplePdfMaroto_SetAliasNbPages() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Ths will create placeholder "{nbs}" to use in texts for total count of pages
 	m.SetAliasNbPages("{nbs}")
@@ -456,7 +456,7 @@ func ExamplePdfMaroto_SetAliasNbPages() {
 // ExamplePdfMaroto_SetBackgroundColor demonstrates how
 // to use the SetBackgroundColor method.
 func ExamplePdfMaroto_SetBackgroundColor() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	m.SetBackgroundColor(color.Color{
 		Red:   100,
@@ -487,7 +487,7 @@ func ExamplePdfMaroto_SetBackgroundColor() {
 // ExamplePdfMaroto_GetBorder demonstrates how to
 // obtain the actual borders status
 func ExamplePdfMaroto_GetBorder() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// false
 	_ = m.GetBorder()
@@ -502,7 +502,7 @@ func ExamplePdfMaroto_GetBorder() {
 
 // ExamplePdfMaroto_GetPageSize demonstrates how to obtain the current page size (width and height)
 func ExamplePdfMaroto_GetPageSize() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Get
 	width, height := m.GetPageSize()
@@ -514,7 +514,7 @@ func ExamplePdfMaroto_GetPageSize() {
 
 // ExamplePdfMaroto_GetCurrentPage demonstrates how to obtain the current page index
 func ExamplePdfMaroto_GetCurrentPage() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Index here will be 0
 	_ = m.GetCurrentPage()
@@ -530,7 +530,7 @@ func ExamplePdfMaroto_GetCurrentPage() {
 // ExamplePdfMaroto_GetCurrentOffset demonstrates how to obtain the current write offset
 // i.e the height of cursor adding content in the pdf
 func ExamplePdfMaroto_GetCurrentOffset() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Offset here will be 0
 	_ = m.GetCurrentOffset()
@@ -550,7 +550,7 @@ func ExamplePdfMaroto_GetCurrentOffset() {
 
 // ExamplePdfMaroto_SetPageMargins demonstrates how to set custom page margins.
 func ExamplePdfMaroto_SetPageMargins() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	m.SetPageMargins(10, 60, 10)
 
@@ -559,7 +559,7 @@ func ExamplePdfMaroto_SetPageMargins() {
 
 // ExamplePdfMaroto_GetPageMargins demonstrates how to obtain the current page margins
 func ExamplePdfMaroto_GetPageMargins() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4, false)
 
 	// Get
 	left, top, right, bottom := m.GetPageMargins()
